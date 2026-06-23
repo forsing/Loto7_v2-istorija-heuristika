@@ -36,7 +36,3 @@ class Loto7Sampler:
       self.rng.setstate(random.getstate())
       random.setstate(state)
 
-"""
-
-"""
-
