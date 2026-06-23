@@ -1,14 +1,14 @@
 # Pokretanje koraka — Loto 7/39 (ceo CSV)
 
 ```bash
-cd /Users/4c/Desktop/GHQ/STATISTIKA/lottery_v2
+cd ....
 ```
 
-Okruženje: **tesla_env**
+Okruženje: ** venv **
 
 ---
  
-## Korak 1 — backtest (ceo CSV, dugo)
+## Korak 1 — backtest (ceo CSV)
 
 ```bash
 python loto7_korak1.py
@@ -53,7 +53,7 @@ Izlaz: **`loto7_korak4.txt`**
 
 ---
 
-## Korak 5 — + neuronska mreža (sporo)
+## Korak 5 — + neuronska mreža 
 
 ```bash
 python loto7_korak5.py
@@ -75,19 +75,15 @@ Izlaz: **`loto7_korak6.txt`**
 
 ## Redosled
 
-1 → 2 → 3 → 4 → 5 → 6, svaki posebno, proveri txt, pa dalje.
+1 → 2 → 3 → 4 → 5 → 6, svaki posebno.
 
-CSV: `data/loto7hh_4636_k49.csv` (podrazumevano).
-
-
-
+CSV: `/data/loto7hh_4636_k49.csv`.
 
 
 
 *******************
 
 
-# Lottery v2 — Loto 7/39
 
 ## Pipeline
 
@@ -110,7 +106,7 @@ Detalji: **`KORACI.md`**
 | 5 | `python loto7_korak5.py` | `loto7_korak5.txt` |
 | 6 | `python loto7_korak6.py` | `loto7_korak6.txt` |
 
-CSV: `data/loto7hh_4636_k49.csv`. Seed: **39**.
+CSV: `/data/loto7hh_4636_k49.csv`. Seed: **39**.
 
 ## Fajlovi
 
@@ -138,21 +134,16 @@ CSV: `data/loto7hh_4636_k49.csv`. Seed: **39**.
 
 
 
-
-
-
-
 ****************
 
 
 
-
-lottery_v2 — analiza metoda, tehnika i strategija
-Ukupni tok
 CSV (4636 kola) → 6 pool-ova → ~8000 kandidata → filter → skor (fusion) → najbolja kombinacija
-Sistem ne predviđa sledeće kolo direktno — generiše i rangira kombinacije po skladu sa istorijom i heuristikama. Seed 39, opsezi zbira/raspnona iz CSV-a (p10–p90).
+Sistem ne predviđa sledeće kolo direktno 
+— generiše i rangira kombinacije po skladu sa istorijom i heuristikama. 
+Seed 39, opsezi zbira/raspnona iz CSV.
 
-6 koraka (strategija nadogradnje)
+6 koraka (strategija)
 Korak	Šta radi	Slojevi u skoru
 1
 Walk-forward backtest (ceo CSV) vs nasumična kombinacija
@@ -209,17 +200,17 @@ zbir 105–176, raspon 23–36 (iz CSV)
 svi parni / svi neparni
 prazna zona (1–13 / 14–26 / 27–39)
 ≥5 uzastopnih brojeva
-Prednost: sužava prostor na „realistične“ kombinacije (~većina istorijskih kola).
-Mana: i nasumičan izbor + filter može izgledati „pametno“ bez prediktivne snage.
+Sužava prostor na „realistične“ kombinacije (~većina istorijskih kola).
+I nasumičan izbor + filter može izgledati „pametno“ bez prediktivne snage.
 
 3. Pattern — pattern_recognizer
-Skor poklapanja sa distribucijama iz poslednjih ~500 kola:
+Skor poklapanja sa distribucijama iz svih kola:
 
 raspon, uzastopni parovi, zbir, parnost
 ponavljanje iz prethodnog kola
 krajnja cifra, zone, prosti brojevi, AC vrednost
-Prednost: bogat deskriptivni model; uzima u obzir prethodno kolo.
-Mana: mnogo težina (OBRAZAC_TEZINE) — podešavanje na istoriji; rizik da „uči šum“.
+Bogat deskriptivni model; uzima u obzir prethodno kolo.
+Mnogo težina (OBRAZAC_TEZINE) — podešavanje na istoriji; rizik da „uči šum“.
 
 4. Struktura (3 modula)
 difference_sequence
@@ -245,76 +236,68 @@ Skor strukture = prosek (razmake + gravitacija + matrica).
 5. Constraint — constraint_engine
 5 strategija (balans, široki opseg, visoka/niska suma, trend) sa hard i soft pravilima (zbir, parnost, zone, raspon, prosti, AC, uzastopni).
 
-Prednost: eksplicitne, proverljive strategije; soft skor za fusion.
-Mana: strategije su ručno definisane; ne zna se koja je „prava“ za sledeće kolo.
+Eksplicitne, proverljive strategije; soft skor za fusion.
+Strategije su ručno definisane; ne zna se koja je „prava“ za sledeće kolo.
 
 6. Bajes — bayesian.py
-Beta-Binomial (Jeffreys apriori) → očekivana verovatnoća pojave svakog broja; skor = prosek po brojevima u kombinaciji.
+Beta-Binomial (Jeffreys apriori) → očekivana verovatnoća pojave svakog broja;
+skor = prosek po brojevima u kombinaciji.
 
-Prednost: statistički korektan način za frekvencije; izglađuje retke brojeve.
-Mana: pretpostavlja stacionarnu verovatnoću — u fair lotou svaki broj ima istu šansu.
+Statistički korektan način za frekvencije; izglađuje retke brojeve.
+Pretpostavlja stacionarnu verovatnoću — u fair lotou svaki broj ima istu šansu.
 
 7. Neural — neural_models + loto7_neural
-Ansambl TabNet + LSTM + Transformer na 12 osobina po broju (frekvencija, recency, itd.). Korak 5–6, 8 epoha treninga.
+Ansambl TabNet + LSTM + Transformer na 12 osobina po broju
+(frekvencija, recency, itd.). Korak 5–6, 8 epoha treninga.
 
-Prednost: uči nelinearne obrasce iz sekvence kola.
-Mana: sporo; lako overfit na 4636 kola; bez PyTorch-a preskače se; mali uticaj (10–15% u skoru).
+Uči nelinearne obrasce iz sekvence kola.
+Sporo; lako overfit na 4636 kola; bez PyTorch-a preskače se; mali uticaj (10–15% u skoru).
 
 8. Game theory — samo u pool-u
 Bira „nepopularne“ kombinacije (visoki brojevi, ekstremna parnost, veliki raspon…).
 
-Mana: nije u glavnom skoru engine-a — utiče samo kroz 10% „igra“ pool-a.
+Nije u glavnom skoru engine-a — utiče samo kroz 10% „igra“ pool-a.
 
 9. Genetika — genetic_optimizer
 GA (populacija 30, 15 generacija) za pool i internu optimizaciju.
 
-Prednost: evolutivna pretraga prostora kombinacija.
-Mana: fitness = istorijski skor → optimizuje prošlost, ne budućnost.
+Evolutivna pretraga prostora kombinacija.
+fitness = istorijski skor → optimizuje prošlost, ne budućnost.
 
 Korak 1 — backtest strategija
 Walk-forward: za svako kolo t trenira na kola[:t], predviđa kola[t], poredi sa random.
 
 Metrike: prosečan broj pogodaka, % ≥2 pogotka, vs teorija (7²)/39 ≈ 1.26.
 
-Prednost: jedini objektivan test u paketu.
-Mana: spor (hiljade kola × engine); 1200 pokušaja u backtestu vs 8000 u predikciji — razlicit broj pokušaja (max_pokusaja). 
+Jedini objektivan test.
+Spor (hiljade kola × engine); 1200 pokušaja u backtestu vs 8000 u predikciji 
+— razlicit broj pokušaja (max_pokusaja). 
 
-Sistemska prednost / mana
-Prednost	Mana
-Modularan, koraci se mogu testirati jedan po jedan
-Mnogo modula = teško znati šta stvarno pomaže
-Filter + pattern su vezani za realan CSV 7/39
-DLT nasleđe (imena, neki parametri)
-Backtest vs random
-Lotto je i.i.d. — istorija ne predviđa budućnost
-Jedan izlaz, reproduktibilan (seed 39)
-8000 pokušaja = lokalni optimum, ne globalni
 
-Ne utiče na verovatnoću izvlačenja
-Šta je „strategija“ u praksi
 Statistička — frekvencije, Bajes, pattern distribucije
 Strukturalna — razmake, gravitacija, matrica, AC, zone
 Ograničavajuća — filter + constraint strategije
 Metaheuristička — GA, 8000 pokušaja, pool mešavina
 ML — neural ansambl
 EV — game theory (izbegavanje popularnih brojeva)
-Sve to rangira kombinacije koje liče na istoriju — ne dokazuje prediktivnu prednost dok korak 1 ne pokaže stabilno bolje od randoma na celom CSV-u.
+
+Sve to rangira kombinacije koje liče na istoriju 
+— ne dokazuje prediktivnu prednost dok korak 1 ne pokaže stabilno bolje od randoma na celom CSV.
 
 
 
 
 
 
-
-
-
-Šta radi lottery_v2
-Učitava CSV → iz 6 pool-ova (vrući, hladni, balans, trend, igra, genetika) pravi kandidate → filter (zbir, raspon, zone, parnost…) → skor po aktivnom koraku → bira najbolju od ~8000 pokušaja. Seed 39.
+Učitava CSV → iz 6 pool-ova (vrući, hladni, balans, trend, igra, genetika) pravi kandidate 
+→ filter (zbir, raspon, zone, parnost…) → skor po aktivnom koraku 
+→ bira najbolju od ~8000 pokušaja. Seed 39.
 
 Korak 1: walk-forward backtest na celom CSV-u (model vs random).
-Koraci 2–6: ista predikcija, ali se postepeno dodaju slojevi skora (pattern + struktura → constraint → Bajes → neural → pun fusion).
+Koraci 2–6: ista predikcija, ali se postepeno dodaju slojevi skora 
+(pattern + struktura → constraint → Bajes → neural → pun fusion).
 
-Metode (bez ocenjivanja po stavci)
+
 Pool: frekvencije, trend zbira, game theory (nepopularne kombinacije), genetski algoritam
 Filter: statistički opsezi iz CSV-a
 Pattern: raspon, zbir, parnost, ponavljanje, zone, prosti, AC…
@@ -322,8 +305,6 @@ Struktura: razmake, co-occurrence, matrica 7×6
 Constraint: 5 strategija (hard/soft pravila)
 Bajes: Beta-Binomial frekvencije
 Neural: TabNet + LSTM + Transformer (korak 5–6)
-Prednosti / mane — ceo projekat
-Prednosti: modularan, koraci se testiraju jedan po jedan; backtest postoji; filter i opsezi su vezani za tvoj 7/39 CSV; reproduktibilan (seed 39).
-
-
-
+Modularan, koraci se testiraju jedan po jedan; 
+backtest postoji; filter i opsezi su vezani za tvoj 7/39 CSV; 
+reproduktibilan (seed 39).
