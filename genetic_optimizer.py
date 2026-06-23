@@ -516,17 +516,17 @@ if __name__ == "__main__":
    Grupa  20 | prosečna podobnost: 0.2339 | Najboljapodobnost: 0.2377
 ✅ Evolucija završena
    Najbolja podobnost: 0.2377
-   Najbolja kombinacija: Glavna zona: [3, 10, 12, 16, 20, 27, 34] | Dodatna zona: [] | podobnost: 0.2377
+   Najbolja kombinacija: Glavna zona: [3, x, 12, y, 20, z, 34] | Dodatna zona: [] | podobnost: 0.2377
 ✅ Genetska optimizacija završena: generisano 3  optimizovanih kombinacija
 \n🏆 Rezultat optimizacije:
    Grupa 1 (pouzdanost: 0.2377):
-       Glavna zona: [3, 10, 12, 16, 20, 27, 34]
+       Glavna zona: [3, x, 12, y, 20, z, 34]
        Dodatna zona: []
    Grupa 2 (pouzdanost: 0.2376):
-       Glavna zona: [2, 10, 12, 16, 20, 27, 34]
+       Glavna zona: [2, x, 12, y, 20, z, 34]
        Dodatna zona: []
    Grupa 3 (pouzdanost: 0.2373):
-       Glavna zona: [3, 10, 12, 16, 20, 29, 34]
+       Glavna zona: [3, x, 12, y, 20, z, 34]
        Dodatna zona: []
 \n📈 Statistika evolucije:
    Konačna prosečna podobnost: 0.2341
