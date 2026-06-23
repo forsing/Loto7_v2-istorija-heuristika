@@ -8,7 +8,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 
-DEFAULT_CSV = Path("/Users/4c/Desktop/GHQ/data/loto7hh_4636_k49.csv")
+DEFAULT_CSV = Path("/data/loto7hh_4636_k49.csv")
 
 
 @dataclass(frozen=True)
