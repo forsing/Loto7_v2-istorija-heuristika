@@ -154,7 +154,7 @@ Preskočen backtest — predikcija na celom CSV (4636 kola)
 Loto 7/39 — KORAK 1
 Retrospektivni test (walk-forward, ceo CSV)
 Generisano: 23.06.2026 11:29
-CSV: /Users/4c/Desktop/GHQ/data/loto7hh_4636_k49.csv
+CSV: /data/loto7hh_4636_k49.csv
 Kola u CSV: 4636
 Testirano kola: 0 (backtest preskočen)
 Model koraka u testu: 2
@@ -166,9 +166,9 @@ Teorija (7 brojeva):     1.256
 Pogodaka≥2 model:   0.0%
 Pogodaka≥2 slučajno: 0.0%
 
-Kombinacija: 07  09  19  22  24  32  38  skor=0.4413
+Kombinacija: 07  x  19  y  24  z  38  skor=0.4413
 Trajanje: 3 min 33 s
-Korak 1 → /Users/4c/Desktop/GHQ/STATISTIKA/lottery_v2/loto7_korak1.txt
+Korak 1 → /lottery_v2/loto7_korak1.txt
 """
 
 
@@ -178,7 +178,7 @@ Korak 1 → /Users/4c/Desktop/GHQ/STATISTIKA/lottery_v2/loto7_korak1.txt
 """
 Loto 7/39 — KORAK 1
 Retrospektivni test (walk-forward, ceo CSV)
-CSV: /Users/4c/Desktop/GHQ/data/loto7hh_4636_k49.csv
+CSV: /data/loto7hh_4636_k49.csv
 Kola u CSV: 4636
 Testirano kola: 4236 (od indeksa 400)
 Model koraka u testu: 2
@@ -190,7 +190,7 @@ Teorija (7 brojeva):     1.256
 Pogodaka≥2 model:   36.9%
 Pogodaka≥2 slučajno: 36.7%
 
-Kombinacija: 05  07  08  10  14  31  32
+Kombinacija: 05  x  08  y  14  z  32
 Skor: 02592
 """
 
@@ -221,7 +221,7 @@ Retrospektivni test: 4636 kola u CSV, test od indeksa 400
   ... 4200/4236 kola
 Loto 7/39 — KORAK 1
 Retrospektivni test (walk-forward, ceo CSV)
-CSV: /Users/4c/Desktop/GHQ/data/loto7hh_4636_k49.csv
+CSV: /data/loto7hh_4636_k49.csv
 Kola u CSV: 4636
 Testirano kola: 4236 (od indeksa 400)
 Model koraka u testu: 2
@@ -233,8 +233,8 @@ Teorija (7 brojeva):     1.256
 Pogodaka≥2 model:   36.9%
 Pogodaka≥2 slučajno: 36.7%
 
-Kombinacija: 05  07  08  10  14  31  32  skor=0.2592
+Kombinacija: 05  x  08  y  14  z  32  skor=0.2592
 .Skor: 0.2592
 
-Korak 1 → /Users/4c/Desktop/GHQ/STATISTIKA/lottery_v2/loto7_korak1.txt
+Korak 1 → /loto7_korak1.txt
 """
