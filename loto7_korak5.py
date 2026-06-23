@@ -33,10 +33,10 @@ if __name__ == "__main__":
 Loto 7/39 — KORAK 5
 Korak 4 + neuronska mreža (PyTorch, može biti sporo)
 Generisano: 23.06.2026 11:08
-CSV: /Users/4c/Desktop/GHQ/data/loto7hh_4636_k49.csv
+CSV: /data/loto7hh_4636_k49.csv
 Kola u CSV: 4636
 Seed: 39
 
-Kombinacija: 07  09  19  22  24  32  38
+Kombinacija: 07  x  19  y  24  z  38
 Skor: 0.7275
 """
